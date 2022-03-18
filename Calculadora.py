@@ -5,7 +5,7 @@ import os
 sn = 'S'
 
 while (sn=='S'):
-
+    os.system('cls')
     op = int(input("1 - Soma\n2 - Subtração\n3 - Multiplicação\n4 - Divisão\n5 - Raiz quadrada\nDigite a operação desejada: "))
     os.system('cls')
 

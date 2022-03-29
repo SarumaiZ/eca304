@@ -29,50 +29,50 @@ class Pokemon:
         while(AT>150 or AT<0):
             if(AT>150):
                 print("\nValor maior que o limite, digite novamente")
-                AT = int(input("Digite um valor para HP entre 0 e 150: "))
+                AT = int(input("Digite um valor para AT entre 0 e 150: "))
             if(AT<0):
                 print("\nValor menor que o limite, digite novamente")
-                AT = int(input("Digite um valor para HP entre 0 e 150: "))
+                AT = int(input("Digite um valor para AT entre 0 e 150: "))
         self.AT = AT
 
     def atribuiDF(self, DF):
         while(DF>120 or DF<0):
             if(DF>120):
                 print("\nValor maior que o limite, digite novamente")
-                DF = int(input("Digite um valor para HP entre 0 e 120: "))
+                DF = int(input("Digite um valor para DF entre 0 e 120: "))
             if(DF<0):
                 print("\nValor menor que o limite, digite novamente")
-                DF = int(input("Digite um valor para HP entre 0 e 120: "))
+                DF = int(input("Digite um valor para DF entre 0 e 120: "))
         self.DF = DF
 
     def atribuiSP_AT(self, spat):
         while(spat>100 or spat<0):
             if(spat>100):
                 print("\nValor maior que o limite, digite novamente")
-                spat = int(input("Digite um valor para HP entre 0 e 100: "))
+                spat = int(input("Digite um valor para SP_AT entre 0 e 100: "))
             if(spat<0):
                 print("\nValor menor que o limite, digite novamente")
-                spat = int(input("Digite um valor para HP entre 0 e 100: "))
+                spat = int(input("Digite um valor para SP_AT entre 0 e 100: "))
         self.SP_AT = spat
 
     def atribuiSP_DF(self, spdf):
         while(spdf>100 or spdf<0):
             if(spdf>100):
                 print("\nValor maior que o limite, digite novamente")
-                spdf = int(input("Digite um valor para HP entre 0 e 100: "))
+                spdf = int(input("Digite um valor para SP_DF entre 0 e 100: "))
             if(spdf<0):
                 print("\nValor menor que o limite, digite novamente")
-                spdf = int(input("Digite um valor para HP entre 0 e 100: "))
+                spdf = int(input("Digite um valor para SP_DF entre 0 e 100: "))
         self.SP_DF = spdf
 
     def atribuiSP(self, SP):
         while(SP>150 or SP<0):
             if(SP>150):
                 print("\nValor maior que o limite, digite novamente")
-                SP = int(input("Digite um valor para HP entre 0 e 150: "))
+                SP = int(input("Digite um valor para SP entre 0 e 150: "))
             if(SP<0):
                 print("\nValor menor que o limite, digite novamente")
-                SP = int(input("Digite um valor para HP entre 0 e 150: "))
+                SP = int(input("Digite um valor para SP entre 0 e 150: "))
         self.SP = SP
 
     def aprendeGolpe(self, g):

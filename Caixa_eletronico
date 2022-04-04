@@ -1,0 +1,18 @@
+#Matheus Gonçalves Zaitune da Silva RA: 19.01247-0
+
+class pessoa():
+    def __init__(self, nome):
+        self.nome = nome
+        self._idade = None
+        self.__CPF = None
+    def getIdade(self):
+        if self._idade == None:
+            print("Idade não definida")
+        return self._idade
+    def setIdade(self, idade):
+        self._idade=idade
+
+joao = pessoa("Joâo Batista")
+print(joao.getIdade())
+joao.setIdade(45)
+print(joao.getIdade())

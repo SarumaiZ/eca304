@@ -8,7 +8,7 @@ opw = "s"
 opb = "n"
 
 while(opw.lower() == "s"):
-    fig, ax = plt.subplots(figsize=(5, 5), layout='constrained')
+    fig, ax = plt.subplots(figsize=(10, 8), layout='constrained')
     listaX = []
     listaY = []
     listaX2 = []
@@ -63,7 +63,7 @@ while(opw.lower() == "s"):
         K1 = d/a
         K2 = d/c
         K3 = (pow(a, 2)-pow(b,2)+pow(c, 2)+pow(d, 2))/(2*a*c)
-        print("Theta 2 \t Theta 3_1 (cos) \t Theta 3_1 (sen) \t Theta 4_1 \t Theta 3_2 (cos) \t Theta 3_2 (sen) \t Theta 4_2 \t Posição X \t Posição Y")
+        print("Theta 2 | Theta 3_1 (cos) | Theta 3_1 (sen) | Theta 4_1 | Theta 3_2 (cos) | Theta 3_2 (sen) | Theta 4_2 | Posição X | Posição Y")
         for theta_2 in range(0, 361):
             A = cos(radians(theta_2))-K1-K2*cos(radians(theta_2))+K3
             B = -2*sin(radians(theta_2))
@@ -76,7 +76,7 @@ while(opw.lower() == "s"):
             theta_3_2_sen = degrees(asin((-a*sin(radians(theta_2))+c*sin(radians(theta_4_2)))/(b)))
             PosX = a*cos(radians(theta_2))+b*(cos(radians(theta_3_2)))
             PosY = a*sin(radians(theta_2))+b*(sin(radians(theta_3_2)))
-            print("%6i \t %20.2f \t %20.2f \t %15.2f \t %10.2f \t %20.2f \t %15.2f \t %8.2f \t %8.2f" %(theta_2, theta_3_1, theta_3_1_sen, theta_4_1, theta_3_2, theta_3_2_sen, theta_4_2, PosX, PosY))
+            print("%5i   | %11.2f     | %11.2f     | %8.2f  | %11.2f     | %11.2f     | %8.2f  | %8.2f  | %8.2f " %(theta_2, theta_3_1, theta_3_1_sen, theta_4_1, theta_3_2, theta_3_2_sen, theta_4_2, PosX, PosY))
             listaX.append(PosX)
             listaY.append(PosY)
             listaX2.append(a*cos(radians(theta_2)))

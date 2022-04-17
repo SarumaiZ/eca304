@@ -1,5 +1,4 @@
 import os
-import time
 import matplotlib.pyplot as plt
 import numpy as np
 from math import *
@@ -50,6 +49,7 @@ while(opw.lower() == "s"):
         ax.plot(np.array([d, d+c*cos(radians(theta_4_2))]), np.array([0, c*sin(radians(theta_4_2))]), label='Barra c', color='c')
         ax.plot(np.array([0, d]), np.array([0,0]), label='Barra d', color='yellow')
         ax.scatter(np.array(listaX), np.array(listaY), label='Juntas')
+        ax.text(PosX-PosX*0.5, PosY/2, "Coordenada x: %.2f \nCoordenada y: %.2f" %(PosX, PosY), bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 10})
         ax.set_xlabel('X')
         ax.set_ylabel('Y')
         ax.set_title("Posição do ponto para theta_2=%iº"%theta_2)
@@ -89,7 +89,7 @@ while(opw.lower() == "s"):
         maxY=max(listaY)
         minY=min(listaY)
         print("\n Máximo em X: %.2f \t Mínimo em X: %.2f \n Máximo em Y: %.2f \t Mínimo em Y: %.2f \n" %(maxX, minX, maxY, minY))
-        ax.text(-d-d*0.3, (maxY+minY)/2 , "Variação máxima em x: %.2f mm\n Variação máxima em y: %.2f mm" %(maxX-minX, maxY-minY), bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 10})
+        ax.text(-d-d*0.3, (maxY+minY)/2 , "Variação máxima em x: %.2f mm\nVariação máxima em y: %.2f mm" %(maxX-minX, maxY-minY), bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 10})
         ax.set_title("Análise do movimento")
         ax.plot(np.array([0, minX, a/(sqrt(1+(pow(minY/minX, 2))))]), np.array([0, minY, (minY*a)/(minX*(sqrt(1+(pow(minY/minX, 2)))))]), label='Barras a+b (min)', color='m')
         ax.plot(np.array([maxX, 0]), np.array([maxY, 0]), label='Barras a+b (max)', color='g')
@@ -110,7 +110,7 @@ while(opw.lower() == "s"):
         plt.cla()
         plt.close()
     else:
-        op = int(input("Digite um número válido!: "))
+        print("\nDigite um número válido!\n")
     opw = input("Deseja fazer outro cálculo?(S/N): ")
     if opw=='s':
         opb = input("Deseja utilizar os mesmos dados de tamanho de barra?(S/N): ")

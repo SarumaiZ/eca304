@@ -21,7 +21,7 @@ while(opw.lower() == "s"):
         d = float(input("Digite o tamanho da barra d [mm]: "))
     op = int(input("\n1 - Inserir o valor de theta_2\n2 - Calcular para todos valores de theta_2\nDigite sua opção: "))
     if(op==1):
-        fig, ax = plt.subplots( figsize=(10, 8), layout='constrained')
+        fig, ax = plt.subplots( figsize=(6, 4), layout='constrained')
         theta_2 = float(input("\nDigite o valor de theta_2: "))
         K1 = d/a
         K2 = d/c
@@ -64,7 +64,7 @@ while(opw.lower() == "s"):
         if opw=='s':
             opb = input("Deseja utilizar os mesmos dados de tamanho de barra?(S/N): ")
     elif(op==2):
-        fig, ax = plt.subplots( figsize=(8, 6), layout='constrained')
+        fig, ax = plt.subplots( figsize=(6, 4), layout='constrained')
         ax.set(xlim=(-a-a*0.15, d+d*0.15), ylim=(-a-a*0.1, a+b+(a+b)*0.1))
         K1 = d/a
         K2 = d/c
@@ -87,14 +87,14 @@ while(opw.lower() == "s"):
             listaY.append(PosY)
             listaX2.append(a*cos(radians(theta_2)))
             listaY2.append(a*sin(radians(theta_2)))
-            if theta_2%5==0:
+            if theta_2%2==0:
                 ax.set(xlim=(-a-a*0.15-c/4, d+d*0.15+c/4), ylim=(-a-a*0.1, a+b+(a+b)*0.1))
                 ax.set_aspect('equal', adjustable='box')
                 ax.plot(np.array([0, a*cos(radians(theta_2))]), np.array([0, a*sin(radians(theta_2))]), color='red')
                 ax.plot(np.array([a*cos(radians(theta_2)), a*cos(radians(theta_2)) + b*cos(radians(theta_3_2))]), np.array([a*sin(radians(theta_2)), a*sin(radians(theta_2)) + b*sin(radians(theta_3_2))]), color='green')
                 ax.plot(np.array([d, d+c*cos(radians(theta_4_2))]), np.array([0, c*sin(radians(theta_4_2))]), color='c')
                 ax.plot(np.array([0, d]), np.array([0,0]), color='y')
-                time.sleep(0.01)
+                time.sleep(0.005)
                 plt.pause(0.0001)
                 ax.cla()
         maxX=max(listaX)

@@ -45,9 +45,13 @@ while(opw.lower() == "s"):
     os.system('cls')
     if opb.lower() != 's':
         a = float(input("Digite o tamanho da barra a [mm]: "))
+        #a = 50
         b = float(input("Digite o tamanho da barra b [mm]: "))
+        #b = 180
         c = float(input("Digite o tamanho da barra c [mm]: "))
+        #c = 180
         d = float(input("Digite o tamanho da barra d [mm]: "))
+        #d = 140
         op = int(input("\n1 - Inserir o valor de theta_2\n2 - Calcular para todos valores de theta_2\nDigite sua opção: "))
     else:
         op = int(input("1 - Inserir o valor de theta_2\n2 - Calcular para todos valores de theta_2\nDigite sua opção: "))
@@ -75,7 +79,7 @@ while(opw.lower() == "s"):
         fig, ax = plt.subplots(figsize=(6, 4), layout='constrained')
         ax.set_title("Análise do movimento")
         print("\n| Theta 2 | Theta 3_1 (cos) | Theta 3_1 (sen) | Theta 4_1 | Theta 3_2 (cos) | Theta 3_2 (sen) | Theta 4_2 | Posição X | Posição Y")
-        for theta_2 in range(0, 361):
+        for theta_2 in range(0, 360):
             param = calcParam(a, b, c, d, theta_2)
             PosX = a*cos(radians(theta_2))+b*(cos(radians(param[3])))
             PosY = a*sin(radians(theta_2))+b*(sin(radians(param[3])))
@@ -91,22 +95,35 @@ while(opw.lower() == "s"):
                 ax.plot(np.array([a*cos(radians(theta_2)), a*cos(radians(theta_2)) + b*cos(radians(param[3]))]), np.array([a*sin(radians(theta_2)), a*sin(radians(theta_2)) + b*sin(radians(param[3]))]), color='green')
                 ax.plot(np.array([d, d+c*cos(radians(param[1]))]),np.array([0, c*sin(radians(param[1]))]), color='c')
                 ax.plot(np.array([0, d]), np.array([0, 0]), color='y')
-                time.sleep(0.005)
+                time.sleep(0.001)
                 plt.pause(0.0001)
                 ax.cla()
         maxX = max(listaX)
         minX = min(listaX)
         maxY = max(listaY)
         minY = min(listaY)
+        ax.plot(np.array(listaX), np.array(listaY), label='Movimento final')
+        listaX = [0, d, maxX, minX]
+        listaY = [0, 0, maxY, minY]
         print("\n Máximo em X: %.2f \t Mínimo em X: %.2f \n Máximo em Y: %.2f \t Mínimo em Y: %.2f \n" % (maxX, minX, maxY, minY))
-        ax.text(-d-d*0.3, (maxY+minY)/2, "Variação máxima em x: %.2f mm\nVariação máxima em y: %.2f mm" %(maxX-minX, maxY-minY), bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 10})
-        ax.plot(np.array([0, minX, a/(sqrt(1+(pow(minY/minX, 2))))]), np.array([0, minY,(minY*a)/(minX*(sqrt(1+(pow(minY/minX, 2)))))]), label='Barras a+b (min)', color='m')
+        ax.text(-d-d*0.1, (maxY+minY)/2, "Variação máxima em x: %.2f mm\nVariação máxima em y: %.2f mm" %(maxX-minX, maxY-minY), bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 10})
+        if(minX<=0):
+            ax.plot(np.array([0, minX, a/(sqrt(1+(pow(minY/minX, 2))))]), np.array([0, minY, (minY*a)/(minX*(sqrt(1+(pow(minY/minX, 2)))))]), label='Barras a+b (min)', color='m')
+            listaX.append(a /(sqrt(1+(pow(minY/minX, 2)))))
+            listaY.append((minY*a)/(minX*(sqrt(1+(pow(minY/minX, 2))))))
+        else:
+            ax.plot(np.array([0, minX, -a/(sqrt(1+(pow(minY/minX, 2))))]), np.array([0, minY, -(minY*a)/(minX*(sqrt(1+(pow(minY/minX, 2)))))]), label='Barras a+b (min)', color='m')
+            listaX.append(-a/(sqrt(1+(pow(minY/minX, 2)))))
+            listaY.append(-(minY*a)/(minX*(sqrt(1+(pow(minY/minX, 2))))))
+        if(maxX<=0):
+            listaX.append(-a/(sqrt(1+(pow(maxY/maxX, 2)))))
+            listaY.append(-(maxY*a)/(maxX*(sqrt(1+(pow(maxY/maxX, 2))))))
+        else:
+            listaX.append(a/(sqrt(1+(pow(maxY/maxX, 2)))))
+            listaY.append((maxY*a)/(maxX*(sqrt(1+(pow(maxY/maxX, 2))))))
         ax.plot(np.array([maxX, 0]), np.array([maxY, 0]),label='Barras a+b (max)', color='g')
         ax.plot(np.array([d, maxX]), np.array([0, maxY]),label='Barra c (max)', color='c')
         ax.plot(np.array([d, minX]), np.array([0, minY]),label='Barra c (min)', color='k')
-        ax.plot(np.array(listaX), np.array(listaY), label='Movimento final')
-        listaX = [0, d, maxX, minX, a /(sqrt(1+(pow(minY/minX, 2)))), a/(sqrt(1+(pow(maxY/maxX, 2))))]
-        listaY = [0, 0, maxY, minY, (minY*a)/(minX*(sqrt(1+(pow(minY/minX, 2))))),(maxY*a)/(maxX*(sqrt(1+(pow(maxY/maxX, 2)))))]
         ax.plot(np.array(listaX2), np.array(listaY2),label='Movimento barra a', color='red')
         ax.plot(np.array([0, d]), np.array([0, 0]),label='Barra d', color='yellow')
         ax.scatter(np.array(listaX), np.array(listaY), label='Juntas')

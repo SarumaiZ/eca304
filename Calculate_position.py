@@ -62,7 +62,7 @@ while(opw.lower() == "s"):
         opg = input("Seu mecanismo possui braço para garra?(S/N): ").lower()
         if(opg=='s'):
             garra=input("Digite qual braço possui a garra (b ou c): ")
-            garraComp = float(input("Digite o comprimento da junta até a garra: "))
+            garraComp = float(input("Digite o comprimento da junta até a garra [mm]: "))
         else:
             garra='x'
             garraComp=0.0
@@ -71,7 +71,7 @@ while(opw.lower() == "s"):
         opg = input("Seu mecanismo possui braço para garra?(S/N): ").lower()
         if(opg=='s'):
             garra=input("Digite qual braço possui a garra (b ou c): ")
-            garraComp = float(input("Digite o comprimento da junta até a garra: "))
+            garraComp = float(input("Digite o comprimento da junta até a garra [mm]: "))
         else:
             garra='x'
             garraComp=0.0
@@ -189,11 +189,22 @@ while(opw.lower() == "s"):
             listaX.append(a/(sqrt(1+(pow(maxY/maxX, 2)))))
             listaY.append((maxY*a)/(maxX*(sqrt(1+(pow(maxY/maxX, 2))))))
         if(garra=='b'):
-            #Corrigir os plots quando o X ou Y são menores que 0
-            ax.plot(np.array([maxX, (a+b+garraComp)/(sqrt(1+pow(maxY/maxX, 2)))]), np.array([maxY, ((a+b+garraComp)*maxY)/(maxX*(sqrt(1+pow(maxY/maxX, 2))))]), label='Barra da garra máximo', color='g')
-            ax.plot(np.array([minX, (-a+b+garraComp)/(sqrt(1+pow(minY/minX, 2)))]), np.array([minY, ((-a+b+garraComp)*minY)/(minX*(sqrt(1+pow(minY/minX, 2))))]), label='Barra da garra mínimo', color='m')
-            listaX = listaX + [(a+b+garraComp)/(sqrt(1+pow(maxY/maxX, 2))), (-a+b+garraComp)/(sqrt(1+pow(minY/minX, 2)))]
-            listaY = listaY + [((a+b+garraComp)*maxY)/(maxX*(sqrt(1+pow(maxY/maxX, 2)))), ((-a+b+garraComp)*minY)/(minX*(sqrt(1+pow(minY/minX, 2))))]
+            if(maxX<=0):
+                ax.plot(np.array([maxX, -(a+b+garraComp)/(sqrt(1+pow(maxY/maxX, 2)))]), np.array([maxY, -((a+b+garraComp)*maxY)/(maxX*(sqrt(1+pow(maxY/maxX, 2))))]), label='Barra da garra máximo', color='g')
+                listaX.append(-(a+b+garraComp)/(sqrt(1+pow(maxY/maxX, 2))))
+                listaY.append(-((a+b+garraComp)*maxY)/(maxX*(sqrt(1+pow(maxY/maxX, 2)))))
+            else:
+                ax.plot(np.array([maxX, (a+b+garraComp)/(sqrt(1+pow(maxY/maxX, 2)))]), np.array([maxY, ((a+b+garraComp)*maxY)/(maxX*(sqrt(1+pow(maxY/maxX, 2))))]), label='Barra da garra máximo', color='g')
+                listaX.append((a+b+garraComp)/(sqrt(1+pow(maxY/maxX, 2))))
+                listaY.append(((a+b+garraComp)*maxY)/(maxX*(sqrt(1+pow(maxY/maxX, 2)))))
+            if(minX<=0):
+                ax.plot(np.array([minX, -(-a+b+garraComp)/(sqrt(1+pow(minY/minX, 2)))]), np.array([minY, -((-a+b+garraComp)*minY)/(minX*(sqrt(1+pow(minY/minX, 2))))]), label='Barra da garra mínimo', color='m')
+                listaX.append(-(-a+b+garraComp)/(sqrt(1+pow(minY/minX, 2))))
+                listaY.append(-((-a+b+garraComp)*minY)/(minX*(sqrt(1+pow(minY/minX, 2)))))
+            else:
+                ax.plot(np.array([minX, (-a+b+garraComp)/(sqrt(1+pow(minY/minX, 2)))]), np.array([minY, ((-a+b+garraComp)*minY)/(minX*(sqrt(1+pow(minY/minX, 2))))]), label='Barra da garra mínimo', color='m')
+                listaX.append((-a+b+garraComp)/(sqrt(1+pow(minY/minX, 2))))
+                listaY.append(((-a+b+garraComp)*minY)/(minX*(sqrt(1+pow(minY/minX, 2)))))
         if(garra=='c'):
             ax.plot(np.array([maxX, maxgx]), np.array([maxY, maxgy]), label='Barra da garra máximo', color='c')
             ax.plot(np.array([minX, mingx]), np.array([minY, mingy]), label='Barra da garra mínimo', color='k')

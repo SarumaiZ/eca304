@@ -44,10 +44,6 @@ while(opw.lower() == "s"):
     listaX3 = []
     listaY3 = []
     param = []
-
-    listaXC=[]
-    listaYC=[]
-
     ver=0
     os.system('cls')
     if opb.lower() != 's':
@@ -115,7 +111,7 @@ while(opw.lower() == "s"):
         fig, ax = plt.subplots(figsize=(6, 4), layout='constrained')
         ax.set_title("Análise do movimento")
         print("\n| Theta 2 | Theta 3_1 (cos) | Theta 3_1 (sen) | Theta 4_1 | Theta 3_2 (cos) | Theta 3_2 (sen) | Theta 4_2 | Posição X | Posição Y")
-        for theta_2 in range(0, 360):
+        for theta_2 in range(0, 361):
             param = calcParam(a, b, c, d, theta_2)
             PosX = a*cos(radians(theta_2))+b*(cos(radians(param[3])))
             PosY = a*sin(radians(theta_2))+b*(sin(radians(param[3])))
@@ -128,16 +124,18 @@ while(opw.lower() == "s"):
                 garraX = PosX+garraComp*cos(radians(param[3]))
                 garraY = PosY+garraComp*sin(radians(param[3]))
                 ver=1
+                listaX3.append(garraX)
+                listaY3.append(garraY)
             elif(garra=='c'):
                 garraX = PosX+garraComp*cos(radians(param[1]))
                 garraY = PosY+garraComp*sin(radians(param[1]))
                 ver=1
+                listaX3.append(garraX)
+                listaY3.append(garraY)
             else:
                 garraX=PosX
                 garraY=PosY
                 ver=0
-            listaX3.append(garraX)
-            listaY3.append(garraY)
             if theta_2 % 5 == 0:
                 if(ver==0):
                     ax.set(xlim=(-a-a*0.5-c/4, d+d*0.2+c/4),ylim=(-a-a*0.2, a+b+(a+b)*0.2))
@@ -152,7 +150,6 @@ while(opw.lower() == "s"):
                 if(ver==1):
                     ax.set(xlim=(-a-a*0.5-c/3-garraComp, d+garraComp),ylim=(-a-a*0.1, c+garraComp+garraComp*0.3))
                     ax.set_aspect('equal', adjustable='box')
-                    #ax.plot(np.array([listaX3]), np.array([listaY3]))
                     ax.plot(np.array([PosX, garraX]), np.array([PosY, garraY]), color='blue')
                     ax.plot(np.array([0, a*cos(radians(theta_2))]),np.array([0, a*sin(radians(theta_2))]), color='red')
                     ax.plot(np.array([a*cos(radians(theta_2)), a*cos(radians(theta_2)) + b*cos(radians(param[3]))]), np.array([a*sin(radians(theta_2)), a*sin(radians(theta_2)) + b*sin(radians(param[3]))]), color='green')
@@ -165,10 +162,6 @@ while(opw.lower() == "s"):
         minX = min(listaX)
         maxY = max(listaY)
         minY = min(listaY)
-        maxgx=max(listaX3)
-        maxgy=max(listaY3)
-        mingx=min(listaX3)
-        mingy=min(listaY3)
         ax.plot(np.array(listaX), np.array(listaY), label='Movimento final')
         listaX = [0, d, maxX, minX]
         listaY = [0, 0, maxY, minY]
@@ -189,6 +182,10 @@ while(opw.lower() == "s"):
             listaX.append(a/(sqrt(1+(pow(maxY/maxX, 2)))))
             listaY.append((maxY*a)/(maxX*(sqrt(1+(pow(maxY/maxX, 2))))))
         if(garra=='b'):
+            maxgx=max(listaX3)
+            maxgy=max(listaY3)
+            mingx=min(listaX3)
+            mingy=min(listaY3)
             if(maxX<=0):
                 ax.plot(np.array([maxX, -(a+b+garraComp)/(sqrt(1+pow(maxY/maxX, 2)))]), np.array([maxY, -((a+b+garraComp)*maxY)/(maxX*(sqrt(1+pow(maxY/maxX, 2))))]), label='Barra da garra máximo', color='g')
                 listaX.append(-(a+b+garraComp)/(sqrt(1+pow(maxY/maxX, 2))))
@@ -206,6 +203,10 @@ while(opw.lower() == "s"):
                 listaX.append((-a+b+garraComp)/(sqrt(1+pow(minY/minX, 2))))
                 listaY.append(((-a+b+garraComp)*minY)/(minX*(sqrt(1+pow(minY/minX, 2)))))
         if(garra=='c'):
+            maxgx=max(listaX3)
+            maxgy=max(listaY3)
+            mingx=min(listaX3)
+            mingy=min(listaY3)
             ax.plot(np.array([maxX, maxgx]), np.array([maxY, maxgy]), label='Barra da garra máximo', color='c')
             ax.plot(np.array([minX, mingx]), np.array([minY, mingy]), label='Barra da garra mínimo', color='k')
             listaX = listaX+[maxgx, mingx]

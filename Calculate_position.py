@@ -59,6 +59,7 @@ while(opw.lower() == "s"):
         if(opg=='s'):
             garra=input("Digite qual braço possui a garra (b ou c): ")
             garraComp = float(input("Digite o comprimento da junta até a garra [mm]: "))
+            #garraComp = 180 #o que teve o melhor movimento final
         else:
             garra='x'
             garraComp=0.0
@@ -68,6 +69,7 @@ while(opw.lower() == "s"):
         if(opg=='s'):
             garra=input("Digite qual braço possui a garra (b ou c): ")
             garraComp = float(input("Digite o comprimento da junta até a garra [mm]: "))
+            #garraComp = 180 #o que teve o melhor movimento final
         else:
             garra='x'
             garraComp=0.0

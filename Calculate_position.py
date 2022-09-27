@@ -60,6 +60,8 @@ while(opw.lower() == "s"):
             garra=input("Digite qual braço possui a garra (b ou c): ")
             garraComp = float(input("Digite o comprimento da junta até a garra [mm]: "))
             #garraComp = 180 #o que teve o melhor movimento final
+            #distancia da junta ate a ponta da garra de 100mm para diminuir a altura e provavelmente diminuir o balanço
+            #outra opção é diminuir 10%-20%
         else:
             garra='x'
             garraComp=0.0
